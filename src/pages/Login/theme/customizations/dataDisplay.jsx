@@ -89,6 +89,7 @@ export const dataDisplayCustomizations = {
             root: ({ theme }) => ({
                 border: '1px solid',
                 borderRadius: '999px',
+                backgroundColor: '#1a1a1a',
                 '& .MuiChip-label': {
                     fontWeight: 600,
                 },

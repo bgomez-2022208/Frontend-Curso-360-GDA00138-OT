@@ -64,7 +64,7 @@ export const inputsCustomizations = {
                                 boxShadow: 'none',
                             },
                             '&:active': {
-                                backgroundColor: gray[800],
+                                backgroundColor: gray[50],
                             },
                             ...theme.applyStyles('dark', {
                                 color: 'black',
@@ -92,10 +92,10 @@ export const inputsCustomizations = {
                             color: 'white',
                             backgroundColor: brand[300],
                             backgroundImage: `linear-gradient(to bottom, ${alpha(brand[400], 0.8)}, ${brand[500]})`,
-                            boxShadow: `inset 0 2px 0 ${alpha(brand[200], 0.2)}, inset 0 -2px 0 ${alpha(brand[700], 0.4)}`,
+                            boxShadow: `inset 0 2px 0 ${alpha(brand[50], 0.2)}, inset 0 -2px 0 ${alpha(brand[700], 0.4)}`,
                             border: `1px solid ${brand[500]}`,
                             '&:hover': {
-                                backgroundColor: brand[700],
+                                backgroundColor: brand[50],
                                 boxShadow: 'none',
                             },
                             '&:active': {
@@ -237,7 +237,7 @@ export const inputsCustomizations = {
                     backgroundColor: gray[200],
                 },
                 ...theme.applyStyles('dark', {
-                    backgroundColor: gray[800],
+                    backgroundColor: gray[50],
                     borderColor: gray[700],
                     '&:hover': {
                         backgroundColor: gray[900],

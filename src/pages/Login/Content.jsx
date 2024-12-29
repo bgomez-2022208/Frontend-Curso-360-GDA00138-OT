@@ -12,27 +12,27 @@ import {SitemarkIcon} from "./CustomerIcons.jsx";
 const items = [
     {
         icon: <SettingsSuggestRoundedIcon sx={{ color: 'text.secondary' }} />,
-        title: 'Adaptable performance',
+        title: 'Envíos rápidos y seguros',
         description:
-            'Our product effortlessly adjusts to your needs, boosting efficiency and simplifying your tasks.',
+            'Garantizamos entregas rápidas y seguras para que disfrutes de tus productos lo antes posible.',
     },
     {
         icon: <ConstructionRoundedIcon sx={{ color: 'text.secondary' }} />,
-        title: 'Built to last',
+        title: 'Calidad garantizada',
         description:
-            'Experience unmatched durability that goes above and beyond with lasting investment.',
+            'Solo ofrecemos productos cuidadosamente seleccionados de la más alta calidad.',
     },
     {
         icon: <ThumbUpAltRoundedIcon sx={{ color: 'text.secondary' }} />,
-        title: 'Great user experience',
+        title: 'Atención personalizada',
         description:
-            'Integrate our product into your routine with an intuitive and easy-to-use interface.',
+            'Nuestro equipo de soporte está siempre disponible para ayudarte con tus compras.',
     },
     {
         icon: <AutoFixHighRoundedIcon sx={{ color: 'text.secondary' }} />,
-        title: 'Innovative functionality',
+        title: 'Pagos seguros',
         description:
-            'Stay ahead with features that set new standards, addressing your evolving needs better than the rest.',
+            'Tus transacciones están protegidas con las mejores medidas de seguridad.',
     },
 ];
 

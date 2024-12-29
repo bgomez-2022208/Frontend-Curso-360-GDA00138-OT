@@ -17,6 +17,10 @@ function AppTheme({ children, disableCustomTheme, themeComponents }) {
                     cssVarPrefix: 'template',
                 },
 
+                palette: {
+                    mode: 'light',
+                },
+
                 components: {
                     ...inputsCustomizations,
                     ...dataDisplayCustomizations,

@@ -7,7 +7,6 @@ import AppTheme from './theme/AppTheme';
 import { useForm } from 'react-hook-form';
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
-import ColorModeSelect from "./theme/ColorModelSelect.jsx";
 
 const schema = Yup.object().shape({
     email: Yup.string()
@@ -57,7 +56,7 @@ export default function Login({ disableCustomTheme = false }) {
     return (
         <AppTheme disableCustomTheme={disableCustomTheme}>
             <CssBaseline enableColorScheme />
-            <ColorModeSelect sx={{ position: 'fixed', top: '1rem', right: '1rem' }} />
+
             <Stack
                 direction="column"
                 component="main"
@@ -65,6 +64,7 @@ export default function Login({ disableCustomTheme = false }) {
                     justifyContent: 'center',
                     height: 'calc((1 - var(--template-frame-height, 0)) * 100%)',
                     marginTop: 'max(40px - var(--template-frame-height, 0px), 0px)',
+
                     minHeight: '100%',
                     position: 'relative',
                     '&::before': {

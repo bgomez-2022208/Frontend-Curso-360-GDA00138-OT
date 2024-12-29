@@ -77,6 +77,13 @@ export default function SignInCard({ control, errors, onSubmit }) {
                                 fullWidth
                                 variant="outlined"
                                 color={errors.email ? 'error' : 'primary'}
+                                sx={{
+                                    '& .MuiOutlinedInput-root': {
+                                        '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                                            borderColor: '#customFocusColor',
+                                        },
+                                    },
+                                }}
                             />
                         )}
                     />
@@ -113,6 +120,13 @@ export default function SignInCard({ control, errors, onSubmit }) {
                                 fullWidth
                                 variant="outlined"
                                 color={errors.password ? 'error' : 'primary'}
+                                sx={{
+                                    '& .MuiOutlinedInput-root': {
+                                        '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                                            borderColor: '#customFocusColor',
+                                        },
+                                    },
+                                }}
                             />
                         )}
                     />
