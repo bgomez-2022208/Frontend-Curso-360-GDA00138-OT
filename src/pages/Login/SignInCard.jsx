@@ -3,10 +3,10 @@ import { useState } from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import MuiCard from '@mui/material/Card';
-import Checkbox from '@mui/material/Checkbox';
+//import Checkbox from '@mui/material/Checkbox';
 import FormLabel from '@mui/material/FormLabel';
 import FormControl from '@mui/material/FormControl';
-import FormControlLabel from '@mui/material/FormControlLabel';
+//import FormControlLabel from '@mui/material/FormControlLabel';
 import Link from '@mui/material/Link';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
@@ -131,10 +131,14 @@ export default function SignInCard({ control, errors, onSubmit }) {
                         )}
                     />
                 </FormControl>
-                <FormControlLabel
-                    control={<Checkbox value="remember" color="primary" />}
-                    label="Remember me"
-                />
+                <FormControl>
+                    {/*
+    <FormControlLabel
+        control={<Checkbox value="remember" color="primary" />}
+        label="Remember me"
+    />
+    */}
+                </FormControl>
                 <ForgotPassword open={open} handleClose={handleClose} />
                 <Button type="submit" fullWidth variant="contained">
                     Sign in
@@ -143,7 +147,7 @@ export default function SignInCard({ control, errors, onSubmit }) {
                     Don&apos;t have an account?{' '}
                     <span>
                         <Link
-                            href="/material-ui/getting-started/templates/sign-in/"
+                            href="/register"
                             variant="body2"
                             sx={{ alignSelf: 'center' }}
                         >
@@ -157,10 +161,10 @@ export default function SignInCard({ control, errors, onSubmit }) {
 }
 
 SignInCard.propTypes = {
-    control: PropTypes.func.isRequired,
+    control: PropTypes.object.isRequired,
     onSubmit: PropTypes.func.isRequired,
     errors: PropTypes.shape({
-        email: PropTypes.string,
-        password: PropTypes.string,
+        email: PropTypes.object,
+        password: PropTypes.object,
     }),
 };
