@@ -146,6 +146,12 @@ export default function RegisterInCard({control, errors, onSubmit}) {
                     </FormControl>
                 </Box>
 
+
+
+
+
+
+
                 <Box className="row">
                 <FormControl className="col-lg-6">
                     <FormLabel htmlFor="telefono">Teléfono</FormLabel>
@@ -167,26 +173,27 @@ export default function RegisterInCard({control, errors, onSubmit}) {
                         )}
                     />
                 </FormControl>
-                <FormControl className="col-lg-6">
-                    <FormLabel htmlFor="direccionEntrega">Dirección de Entrega</FormLabel>
-                    <Controller
-                        name="direccionEntrega"
-                        control={control}
-                        defaultValue=""
-                        render={({field}) => (
-                            <TextField
-                                {...field}
-                                error={!!errors.direccionEntrega}
-                                helperText={errors.direccionEntrega ? errors.direccionEntrega.message : ''}
-                                id="direccionEntrega"
-                                placeholder="Dirección de Entrega"
-                                fullWidth
-                                variant="outlined"
-                                color={errors.direccionEntrega ? 'error' : 'primary'}
-                            />
-                        )}
-                    />
-                </FormControl>
+                    <FormControl className="col-lg-6">
+                        <FormLabel htmlFor="fechaNacimiento">Fecha de Nacimiento</FormLabel>
+                        <Controller
+                            name="fechaNacimiento"
+                            control={control}
+                            defaultValue=""
+                            render={({field}) => (
+                                <TextField
+                                    {...field}
+                                    error={!!errors.fechaNacimiento}
+                                    helperText={errors.fechaNacimiento ? errors.fechaNacimiento.message : ''}
+                                    id="fechaNacimiento"
+                                    type="date"
+                                    fullWidth
+                                    variant="outlined"
+                                    color={errors.fechaNacimiento ? 'error' : 'primary'}
+
+                                />
+                            )}
+                        />
+                    </FormControl>
                 </Box>
 
                 <Box className="row">
@@ -248,27 +255,27 @@ export default function RegisterInCard({control, errors, onSubmit}) {
 
 
                 <Box className="row">
-                <FormControl className="col-lg-12">
-                    <FormLabel htmlFor="fechaNacimiento">Fecha de Nacimiento</FormLabel>
-                    <Controller
-                        name="fechaNacimiento"
-                        control={control}
-                        defaultValue=""
-                        render={({field}) => (
-                            <TextField
-                                {...field}
-                                error={!!errors.fechaNacimiento}
-                                helperText={errors.fechaNacimiento ? errors.fechaNacimiento.message : ''}
-                                id="fechaNacimiento"
-                                type="date"
-                                fullWidth
-                                variant="outlined"
-                                color={errors.fechaNacimiento ? 'error' : 'primary'}
+                    <FormControl className="col-lg-12">
+                        <FormLabel htmlFor="direccionEntrega">Dirección de Entrega</FormLabel>
+                        <Controller
+                            name="direccionEntrega"
+                            control={control}
+                            defaultValue=""
+                            render={({field}) => (
+                                <TextField
+                                    {...field}
+                                    error={!!errors.direccionEntrega}
+                                    helperText={errors.direccionEntrega ? errors.direccionEntrega.message : ''}
+                                    id="direccionEntrega"
+                                    placeholder="Dirección de Entrega"
+                                    fullWidth
+                                    variant="outlined"
+                                    color={errors.direccionEntrega ? 'error' : 'primary'}
+                                />
+                            )}
+                        />
+                    </FormControl>
 
-                            />
-                        )}
-                    />
-                </FormControl>
                 </Box>
 
                 <Button
