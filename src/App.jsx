@@ -3,7 +3,7 @@ import Login from './pages/Login/Login.jsx';
 import Register from './pages/Register/Register.jsx';
 import OperatorHome from './pages/Home/OperatorHome.jsx';
 import OrderHistory from './pages/OrderHistory.jsx';
-import Cart from "./pages/Cart.jsx";
+import Cart from "./components/Cart.jsx";
 import ClientHome from "./pages/Home/ClientHome.jsx";
 const App = () => {
     return (

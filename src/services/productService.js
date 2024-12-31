@@ -5,7 +5,7 @@ export const getProducts = async () => {
         const response = await apiTienda.get('/productos');
         return response.data.map(product => ({
             ...product,
-            stock: product.stockProducto || 0 // Usa el nombre real del campo
+            stock: product.stockProducto || 0
         }));
     } catch (error) {
         console.error('Error al obtener los productos:', error);
