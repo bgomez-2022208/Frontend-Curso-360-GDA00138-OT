@@ -1,4 +1,4 @@
-// ProductCard.jsx
+
 import { useState, useEffect } from 'react';
 import { AddToCartIcon, RemoveFromCartIcon } from "./icons.jsx";
 import "./Products.css";
