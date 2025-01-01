@@ -1,24 +1,40 @@
-import { CartIcon, ClearCartIcon } from './icons.jsx';
 import { useId } from "react";
 import './Cart.css';
 import { useCart } from "../hooks/useCart.js";
 import PropTypes from "prop-types";
+import { CartIcon, ClearCartIcon } from "./icons.jsx";
 
-function CartItem({ fotoProducto, nombreProducto, precioProducto, quantity, removeFromCart }) {
+function CartItem({ idProductos, fotoProducto, nombreProducto, precioProducto, quantity, stock, removeFromCart, incrementQuantity, decrementQuantity }) {
+    const precio = typeof precioProducto === 'string' ? parseFloat(precioProducto) : precioProducto;
+
     return (
         <li className="cart-item">
             <img src={`data:image/jpeg;base64,${fotoProducto}`} alt={nombreProducto} />
             <div>
-                <strong>{nombreProducto}</strong> - ${precioProducto} x {quantity}
+                <strong>{nombreProducto}</strong> - ${precio} x {quantity}
             </div>
-            <button onClick={() => removeFromCart({ idProductos: fotoProducto })}>Eliminar</button>
+            <div>
+                <button
+                    onClick={() => incrementQuantity({ idProductos })}
+                    disabled={quantity >= stock}
+                >
+                    +
+                </button>
+                <button
+                    onClick={() => decrementQuantity({ idProductos })}
+                    disabled={quantity <= 1}
+                >
+                    -
+                </button>
+                <button onClick={() => removeFromCart({ idProductos })}>Eliminar</button>
+            </div>
         </li>
     );
 }
 
 export default function Cart() {
     const cartCheckboxId = useId();
-    const { cart, clearCart, removeFromCart } = useCart();
+    const { cart, clearCart, removeFromCart, incrementQuantity, decrementQuantity } = useCart();
 
     return (
         <>
@@ -31,11 +47,15 @@ export default function Cart() {
                     {cart.map((item) => (
                         <CartItem
                             key={item.idProductos}
+                            idProductos={item.idProductos}
                             fotoProducto={item.fotoProducto}
                             nombreProducto={item.nombreProducto}
-                            precioProducto={item.precioProducto}
+                            precioProducto={Number(item.precioProducto)}
                             quantity={item.quantity}
+                            stock={Number(item.stock)}
                             removeFromCart={removeFromCart}
+                            incrementQuantity={incrementQuantity}
+                            decrementQuantity={decrementQuantity}
                         />
                     ))}
                 </ul>
@@ -48,10 +68,15 @@ export default function Cart() {
     );
 }
 
+
 CartItem.propTypes = {
+    idProductos: PropTypes.number.isRequired,
     fotoProducto: PropTypes.string.isRequired,
     nombreProducto: PropTypes.string.isRequired,
     precioProducto: PropTypes.number.isRequired,
     quantity: PropTypes.number.isRequired,
+    stock: PropTypes.number.isRequired, // Valida el stock
     removeFromCart: PropTypes.func.isRequired,
+    incrementQuantity: PropTypes.func.isRequired, // Valida la función de incremento
+    decrementQuantity: PropTypes.func.isRequired, // Valida la función de decremento
 };

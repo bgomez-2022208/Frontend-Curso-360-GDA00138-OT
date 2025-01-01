@@ -6,6 +6,8 @@
     right: 0px;
     top: 0px;
     width: 300px;
+    z-index: 9998;
+    overflow-y: auto;
 }
 
 .cart img {
@@ -38,7 +40,7 @@
     height: 32px;
     justify-content: center;
     padding: 4px;
-    position: absolute;
+    position: fixed;
     right: 8px;
     top: 8px;
     transition: all .3s ease;
@@ -47,10 +49,18 @@
 }
 
 .cart-button:hover {
-    scale: 1.1;
+    transform: scale(1.1);
 }
 
 .cart-button ~ input:checked ~ .cart {
     height: 100%;
     display: block;
+}
+
+.cart-item button {
+    margin-right: 8px;
+}
+
+.cart-item button:last-child {
+    margin-right: 0;
 }

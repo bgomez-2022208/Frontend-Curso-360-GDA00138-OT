@@ -1,10 +1,12 @@
 .products {
     width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+    box-sizing: border-box;
+    overflow: hidden;
 }
+
 
 .products ul {
     display: grid;
@@ -16,6 +18,8 @@
     )
   );
     gap: 1rem;
+    margin: 0;
+    padding: 0;
 }
 
 .products li {
@@ -27,6 +31,7 @@
     background: #111;
     color: #fff;
     padding: 1rem;
+    overflow: hidden;
 }
 
 .products h3 {
@@ -46,3 +51,4 @@
     object-fit: cover;
     background: #fff;
 }
+

@@ -1,4 +1,3 @@
-// CartProvider.js
 import { createContext, useState } from "react";
 import PropTypes from "prop-types";
 
@@ -23,11 +22,10 @@ export function CartProvider({ children }) {
             { ...product, quantity: 1 }
         ];
         setCart(updatedCart);
-        console.log("Producto agregado al carrito:", updatedCart);
     };
 
     const removeFromCart = (product) => {
-        const newCart = cart.filter(item => item.idProductos !== product.idProductos); // Cambié id a idProductos
+        const newCart = cart.filter(item => item.idProductos !== product.idProductos);
         setCart(newCart);
     };
 
@@ -35,8 +33,42 @@ export function CartProvider({ children }) {
         setCart([]);
     };
 
+    const incrementQuantity = (product) => {
+        const productInCartIndex = cart.findIndex(item => item.idProductos === product.idProductos);
+
+        if (productInCartIndex >= 0) {
+            const productInCart = cart[productInCartIndex];
+
+            if (productInCart.quantity < productInCart.stock) {
+                const newCart = structuredClone(cart);
+                newCart[productInCartIndex].quantity += 1;
+                setCart(newCart);
+                console.log("Cantidad incrementada en el carrito:", newCart);
+            } else {
+                console.log("No puedes agregar más, stock limitado.");
+            }
+        }
+    };
+
+    const decrementQuantity = (product) => {
+        const productInCartIndex = cart.findIndex(item => item.idProductos === product.idProductos);
+
+        if (productInCartIndex >= 0) {
+            const newCart = structuredClone(cart);
+            const productInCart = newCart[productInCartIndex];
+
+            if (productInCart.quantity > 1) {
+                productInCart.quantity -= 1;
+                setCart(newCart);
+                console.log("Cantidad disminuida en el carrito:", newCart);
+            } else {
+                removeFromCart(product);
+            }
+        }
+    };
+
     const checkProductInCart = (product) => {
-        return cart.some(item => item.idProductos === product.idProductos); // Cambié id a idProductos
+        return cart.some(item => item.idProductos === product.idProductos);
     };
 
     return (
@@ -45,7 +77,9 @@ export function CartProvider({ children }) {
             addToCart,
             clearCart,
             checkProductInCart,
-            removeFromCart
+            removeFromCart,
+            incrementQuantity,
+            decrementQuantity,
         }}>
             {children}
         </CartContext.Provider>

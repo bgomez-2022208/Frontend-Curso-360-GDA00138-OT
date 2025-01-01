@@ -6,7 +6,7 @@ import { getProducts } from "../services/productService.js";
 import { useCart } from "../hooks/useCart.js";
 
 export default function ProductCard() {
-    const { addToCart, cart, checkProductInCart, removeFromCart } = useCart();
+    const { addToCart, checkProductInCart, removeFromCart } = useCart();
 
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
