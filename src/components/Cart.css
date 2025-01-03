@@ -8,6 +8,7 @@
     width: 300px;
     z-index: 9998;
     overflow-y: auto;
+    bottom: 0;
 }
 
 .cart img {
@@ -22,13 +23,24 @@
 
 .cart footer {
     display: flex;
-    gap: 8px;
+    gap: 10px;
     justify-content: center;
     align-items: center;
+    margin-top: 20px;
 }
 
 .cart footer button {
-    padding: 8px;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 5px;
+    background-color: #09f;
+    color: white;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.cart footer button:hover {
+    background-color: #007acb;
 }
 
 .cart-button {
@@ -63,4 +75,11 @@
 
 .cart-item button:last-child {
     margin-right: 0;
+}
+
+.cart-buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 20px;
 }

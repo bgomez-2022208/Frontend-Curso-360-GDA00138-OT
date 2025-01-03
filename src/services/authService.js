@@ -6,6 +6,7 @@ export const loginUser = async (email, password) => {
             correoElectronico: email,
             passwordUsuario: password,
         });
+        localStorage.setItem('token', response.data.token);
         return response.data;
     } catch (error) {
         console.error('Error en el login:', error);
