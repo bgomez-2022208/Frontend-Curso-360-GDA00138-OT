@@ -3,7 +3,7 @@ import Stack from '@mui/material/Stack';
 import { useForm } from 'react-hook-form';
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
-import {registerUser} from "../../services/authService.js";
+import {registerUser} from "../../services/AuthService.js";
 import RegisterInCard from "./RegisterInCard.jsx";
 
 const schema = Yup.object().shape({

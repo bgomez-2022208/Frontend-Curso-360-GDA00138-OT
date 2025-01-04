@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react';
 import { AddToCartIcon, RemoveFromCartIcon } from "./icons.jsx";
 import "./Products.css";
-import { getProducts } from "../services/productService.js";
+import { getProducts } from "../services/ProductService.js";
 import { useCart } from "../hooks/useCart.js";
 
 export default function ProductCard() {

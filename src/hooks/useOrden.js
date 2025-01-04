@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import apiTienda from "../services/apiTienda.js";
-import { getIdUsuario } from "../services/userService.js";
+import apiTienda from "../services/ApiTienda.js";
+import { getIdUsuario } from "../services/UserService.js";
 
 const useOrden = () => {
     const [loading, setLoading] = useState(false);

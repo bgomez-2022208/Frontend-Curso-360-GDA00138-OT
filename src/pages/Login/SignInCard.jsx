@@ -145,7 +145,7 @@ export default function SignInCard({ control, errors, onSubmit }) {
                     Don&apos;t have an account?{' '}
                     <span>
                         <Link
-                            href="/register"
+                            href="/registro"
                             variant="body2"
                             sx={{ alignSelf: 'center' }}
                         >

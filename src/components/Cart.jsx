@@ -4,7 +4,7 @@ import { useCart } from "../hooks/useCart.js";
 import PropTypes from "prop-types";
 import { CartIcon, ClearCartIcon } from "./icons.jsx";
 import useOrden from "../hooks/useOrden";
-import { getIdUsuario } from "../services/userService.js";
+import { getIdUsuario } from "../services/UserService.js";
 
 function CartItem({ idProductos, fotoProducto, nombreProducto, precioProducto, quantity, stock, removeFromCart, incrementQuantity, decrementQuantity }) {
     const precio = typeof precioProducto === 'string' ? parseFloat(precioProducto) : precioProducto;

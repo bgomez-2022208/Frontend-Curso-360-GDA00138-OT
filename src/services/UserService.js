@@ -1,4 +1,4 @@
-import apiTienda from './apiTienda.js';
+import apiTienda from './ApiTienda.js';
 
 const decodeJWT = (token) => {
     try {

@@ -1,4 +1,4 @@
-import { loginUser } from '../../services/authService.js';
+import { loginUser } from '../../services/AuthService.js';
 import PropTypes from 'prop-types';
 import Stack from '@mui/material/Stack';
 import SignInCard from './SignInCard';
@@ -27,7 +27,7 @@ export default function Login() {
             const result = await loginUser(data.email, data.password);
             localStorage.setItem('token', JSON.stringify(result));
 
-            window.location.href = '/home/client';
+            window.location.href = '/home/cliente';
         } catch (error) {
             alert(error.response?.data?.message || 'Error al iniciar sesión');
         }
@@ -39,7 +39,6 @@ export default function Login() {
             component="main"
             sx={{
                 justifyContent: 'center',
-                //height: 'calc((1 - var(--template-frame-height, 0)) * 100%)',
                 height: '750px',
                 marginTop: 'max(40px - var(--template-frame-height, 0px), 0px)',
                 minHeight: '100%',
