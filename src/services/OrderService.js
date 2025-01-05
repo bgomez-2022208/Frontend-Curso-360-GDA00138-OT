@@ -35,7 +35,7 @@ const orderService = async (page, pageSize) => {
     }
 };
 
-const actualizarOrdenEstado = async (idOrden) => {
+const OrdenEstadoAceptado = async (idOrden) => {
     try {
         const response = await apiTienda.put(`/ordenEstado/${idOrden}`, {
         });
@@ -46,4 +46,15 @@ const actualizarOrdenEstado = async (idOrden) => {
     }
 };
 
-export { orderService, actualizarOrdenEstado };
+const OrdenEstadoRechazado = async (idOrden, estadoData) => {
+    try {
+        const response = await apiTienda.put(`/cancelarOrden/${idOrden}`, estadoData);
+        console.log(estadoData)
+        return response.data;
+    } catch (error) {
+        console.error('Error al actualizar el estado de la orden:', error);
+        throw error;
+    }
+};
+
+export { orderService, OrdenEstadoRechazado, OrdenEstadoAceptado };

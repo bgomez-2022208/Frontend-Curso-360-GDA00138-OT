@@ -70,12 +70,12 @@ export default function Cart() {
 
         const ordenData = {
             usuarios_idusuarios: usuarioData.idUsuario,
-            estados_idestados: 1,
+            estados_idestados: 9,
             nombreCompleto: usuarioData.nombreCompleto,
             ordenDireccion: clienteData.body.direccionEntrega,
             ordenTelefono: clienteData.body.telefono,
             correoElectronico: usuarioData.correoElectronico,
-            fechaEntrega: '2025-12-28T14:00:00',
+            fechaEntrega: null,
             totalOrden: cart.reduce((total, item) => total + item.precioProducto * item.quantity, 0),
             detalle: cart.map(item => ({
                 idProducto: item.idProductos,

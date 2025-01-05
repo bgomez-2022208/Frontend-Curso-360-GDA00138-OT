@@ -67,3 +67,32 @@ export const getIdUsuario = async () => {
         throw error;
     }
 };
+
+export const obtenerUsuarios = async (page, pageSize) => {
+    try {
+        const response = await apiTienda.get('/usuarios', { params: { page: page, pageSize: pageSize } });
+
+        const usuarios = response.data.usuarios.map(usuario => ({
+            idUsuario: usuario.idUsuario,
+            estados_idestados: usuario.estados_idestados,
+            nombreCompleto: usuario.nombreCompleto,
+            apellido: usuario.apellido,
+            fechaNacimiento: usuario.fechaNacimiento,
+            fechaCreacion: usuario.fechaCreacion,
+            correoElectronico: usuario.correoElectronico,
+            telefonoUsuario: usuario.telefonoUsuario,
+            razonSocial: usuario.cliente.razonSocial,
+            direccionEntrega: usuario.cliente.direccionEntrega
+        }));
+        const pagination = {
+            currentPage: page,
+            pageSize: pageSize,
+            total: response.data.pagination.total,
+            totalPages: response.data.pagination.totalPages
+        };
+        return { usuarios, pagination };
+    } catch (error) {
+        console.error('Error al obtener los usuarios:', error);
+        throw error;
+    }
+};
