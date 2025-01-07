@@ -121,18 +121,18 @@ export default function CategoryCrud() {
             .required("El estado es obligatorio"),
     });
 
-    const { control: createControl, handleSubmit: handleCreateSubmit, formState: { errors: createErrors }, setValue } = useForm({
+    const { control: createControl, handleSubmit: handleCreateSubmit, formState: { errors: createErrors }, } = useForm({
         resolver: yupResolver(createSchema),
     });
 
-    const { control: editControl, handleSubmit: handleEditSubmit, formState: { errors: editErrors },  } = useForm({
+    const { control: editControl, handleSubmit: handleEditSubmit, formState: { errors: editErrors },  setValue: setValueEdit} = useForm({
         resolver: yupResolver(editSchema),
     });
 
     const onEdit = (row) => {
         setSelectedCategory(row);
-        setValue("nombreCategoriaProducto", row.nombre);
-        setValue("idEstado", row.estados_idestados);
+        setValueEdit("nombreCategoriaProducto", row.nombre);
+        setValueEdit("idEstado", row.estados_idestados);
         console.log("Categoría seleccionada:", row);
         setOpenEditDialog(true);
     };
@@ -140,10 +140,10 @@ export default function CategoryCrud() {
     useEffect(() => {
         console.log("Categoría seleccionada 2:", selectedCategory);
         if (selectedCategory) {
-            setValue("nombreCategoriaProducto", selectedCategory.nombre);
-            setValue("idEstado", selectedCategory.estados_idestados);
+            setValueEdit("nombreCategoriaProducto", selectedCategory.nombre);
+            setValueEdit("idEstado", selectedCategory.estados_idestados);
         }
-    }, [selectedCategory, setValue]);
+    }, [selectedCategory, setValueEdit]);
 
     React.useEffect(() => {
         fetchCategorias(page, rowsPerPage);
