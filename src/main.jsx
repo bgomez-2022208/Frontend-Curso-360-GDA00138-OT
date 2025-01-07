@@ -1,10 +1,15 @@
 import ReactDom from 'react-dom/client';
-import Login from './pages/Login/Login.jsx';
+import App from "./App.jsx";
+import React from "react";
+import {StyledEngineProvider} from "@mui/joy";
+
 
 const root = ReactDom.createRoot(document.getElementById('root'));
 
 root.render(
-    <div>
-        <Login/>,
-    </div>
+    <React.StrictMode>
+        <StyledEngineProvider injectFirst>
+            <App />
+        </StyledEngineProvider>
+    </React.StrictMode>
 );
