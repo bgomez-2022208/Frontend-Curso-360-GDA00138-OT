@@ -9,11 +9,11 @@ import { yupResolver } from '@hookform/resolvers/yup';
 
 const schema = Yup.object().shape({
     email: Yup.string()
-        .email('Please enter a valid email address.')
-        .required('Email is required.'),
+        .email('Ingresa una dirección de correo valida.')
+        .required('El email es requerido.'),
     password: Yup.string()
-        .min(6, 'Password must be at least 6 characters long.')
-        .required('Password is required.'),
+        .min(6, 'la contraseña debe contener minimo 6 digitos.')
+        .required('El Password es requerido.'),
 });
 
 export default function Login() {

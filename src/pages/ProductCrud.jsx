@@ -135,11 +135,24 @@ export default function ProductosTable() {
     const [openCreateDialog, setOpenCreateDialog] = useState(false);
 
     const schema = Yup.object().shape({
-        nombreProducto: Yup.string().required('El nombre del producto es obligatorio.'),
-        marcaProducto: Yup.string().required('La marca del producto es obligatoria.'),
-        precioProducto: Yup.number().required('El precio del producto es obligatorio.').positive('El precio debe ser un número positivo.'),
-        stockProducto: Yup.number().required('El stock del producto es obligatorio.').integer('El stock debe ser un número entero.').min(0, 'El stock no puede ser negativo.'),
-        codigoProducto: Yup.string().required('El código del producto es obligatorio.'),
+        nombreProducto: Yup.string()
+            .required('El nombre del producto es obligatorio.')
+            .max(45, 'El nombre no puede tener más de 45 caracteres.'),
+        marcaProducto: Yup.string()
+            .required('La marca del producto es obligatoria.')
+            .max(45, 'La marca no puede tener más de 45 caracteres.'),
+        precioProducto: Yup.number()
+            .required('El precio del producto es obligatorio.')
+            .positive('El precio debe ser un número positivo.')
+            .moreThan(0, 'El precio debe ser mayor a 0.'),
+        stockProducto: Yup.number()
+            .required('El stock del producto es obligatorio.')
+            .integer('El stock debe ser un número entero.')
+            .min(0, 'El stock no puede ser negativo.')
+            .moreThan(0, 'El stock debe ser mayor a 0.'),
+        codigoProducto: Yup.string()
+            .required('El código del producto es obligatorio.')
+            .max(45, 'El código no puede tener más de 45 caracteres.'),
         idCategoriaProductos: Yup.number().required('La categoría del producto es obligatoria.'),
         estados_idestados: Yup.number().required('El estado del producto es obligatorio.'),
     });
@@ -179,6 +192,7 @@ export default function ProductosTable() {
     const handleCloseCreateDialog = () => {
         setOpenCreateDialog(false);
     };
+
 
     const onSubmitCreated = async (data) => {
         try {
@@ -266,6 +280,14 @@ export default function ProductosTable() {
     const handleEdit = (product) => {
         setSelectedProduct(product);
         setOpenEditDialog(true);
+        setValue('nombreProducto', product.nombreProducto);
+        setValue('marcaProducto', product.marcaProducto);
+        setValue('precioProducto', product.precioProducto);
+        setValue('stockProducto', product.stockProducto);
+        setValue('codigoProducto', product.codigoProducto);
+        setValue('idCategoriaProductos', product.idCategoriaProductos);
+        setValue('estados_idestados', product.estados_idestados);
+        setValue('fotoProducto', product.fotoProducto);
     };
 
     const handleCloseEditDialog = () => {
@@ -275,9 +297,9 @@ export default function ProductosTable() {
 
 
     const onSubmit = async (data) => {
+        console.log("Holaa",selectedProduct)
         try {
-            if (data) {
-                console.log("llego a data",data)
+            if (selectedProduct) {
                 await actualizarProducto(selectedProduct.idProductos, data);
                 fetchProductos(page, rowsPerPage);
             }
@@ -291,7 +313,7 @@ export default function ProductosTable() {
         <Box>
             <ButtonAppBar />
             <Header title="Productos" />
-            <TableContainer component={Paper} sx={{height: '790px'}}>
+            <TableContainer component={Paper} sx={{height: '890px'}}>
                 <Table aria-label="collapsible table">
                     <TableHead>
                         <TableRow sx={{position: 'sticky', top: 0, backgroundColor: 'white', zIndex: 1}}>

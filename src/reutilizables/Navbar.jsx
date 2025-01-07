@@ -1,4 +1,4 @@
-import{ useState } from 'react';
+import { useState } from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -7,8 +7,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { Link, useNavigate } from 'react-router-dom';
-
-
+import {jwtDecode} from 'jwt-decode';
 
 export default function ButtonAppBar() {
     const [anchorEl, setAnchorEl] = useState(null);
@@ -26,6 +25,18 @@ export default function ButtonAppBar() {
     const handleMenuClose = () => {
         setAnchorEl(null);
     };
+
+    const getRoleIdFromToken = () => {
+        const token = localStorage.getItem('token');
+        if (!token) {
+            throw new Error('No token found');
+        }
+
+        const decodedToken = jwtDecode(token);
+        return decodedToken.rol_idrol;
+    };
+
+    const roleId = getRoleIdFromToken();
 
     return (
         <Box sx={{ flexGrow: 1 }}>
@@ -46,10 +57,19 @@ export default function ButtonAppBar() {
                         open={Boolean(anchorEl)}
                         onClose={handleMenuClose}
                     >
-                        <MenuItem onClick={handleMenuClose} component={Link} to="/usuarios">Usuarios</MenuItem>
-                        <MenuItem onClick={handleMenuClose} component={Link} to="/home/cliente">Carrito de compras</MenuItem>
-                        <MenuItem onClick={handleMenuClose} component={Link} to="/home/operador">Operador</MenuItem>
-                        <MenuItem onClick={handleMenuClose} component={Link} to="/productos">Productos</MenuItem>
+                        {roleId === 1 ? (
+                            <>
+                                <MenuItem onClick={handleMenuClose} component={Link} to="/usuarios">Usuarios</MenuItem>
+                                <MenuItem onClick={handleMenuClose} component={Link} to="/home/cliente">Carrito de compras</MenuItem>
+                                <MenuItem onClick={handleMenuClose} component={Link} to="/home/operador">Historial de ordenes</MenuItem>
+                                <MenuItem onClick={handleMenuClose} component={Link} to="/productos">Productos</MenuItem>
+                            </>
+                        ) : roleId === 2 ? (
+                            <>
+                                <MenuItem onClick={handleMenuClose} component={Link} to="/home/operador">Historial de ordenes</MenuItem>
+                                <MenuItem onClick={handleMenuClose} component={Link} to="/home/cliente">Carrito de compras</MenuItem>
+                            </>
+                        ) : null}
                         <MenuItem onClick={() => { handleMenuClose(); handleLogout(); }}>Logout</MenuItem>
                     </Menu>
                 </Toolbar>

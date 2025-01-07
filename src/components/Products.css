@@ -7,6 +7,15 @@
     overflow: hidden;
 }
 
+.css-vjrxpc-MuiTypography-root {
+    margin: 0;
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 1.5;
+    letter-spacing: 0.00938em;
+    margin-bottom: 0.35em;
+}
 
 .products ul {
     display: grid;

@@ -81,8 +81,12 @@ export const obtenerUsuarios = async (page, pageSize) => {
             fechaCreacion: usuario.fechaCreacion,
             correoElectronico: usuario.correoElectronico,
             telefonoUsuario: usuario.telefonoUsuario,
-            razonSocial: usuario.cliente.razonSocial,
-            direccionEntrega: usuario.cliente.direccionEntrega
+            razonSocial: usuario.cliente ? usuario.cliente.razonSocial : null,
+            direccionEntrega: usuario.cliente ? usuario.cliente.direccionEntrega : null,
+            nombreRol: usuario.rol.nombreRol,
+            nombreComercial: usuario.cliente ? usuario.cliente.nombreComercial : null,
+            nombreEstado: usuario.estado ? usuario.estado.nombreEstado : null,
+            passwordUsuario: usuario.passwordUsuario
         }));
         const pagination = {
             currentPage: page,
@@ -93,6 +97,56 @@ export const obtenerUsuarios = async (page, pageSize) => {
         return { usuarios, pagination };
     } catch (error) {
         console.error('Error al obtener los usuarios:', error);
+        throw error;
+    }
+};
+
+export const crearUsuario = async (usuariosData) => {
+    try {
+        const response = await apiTienda.post('/usuarios', usuariosData);
+        return response.data;
+    } catch (error) {
+        console.error('Error al crear el usuario:', error);
+        throw error;
+    }
+};
+
+export const crearCliente = async (clientesData) => {
+    try {
+        const response = await apiTienda.post('/register', clientesData);
+        return response.data;
+    } catch (error) {
+        console.error('Error al crear el cliente:', error);
+        throw error;
+    }
+};
+
+export const obtenerEstados = async () => {
+    try {
+        const response = await apiTienda.get('/estados');
+        return response.data;
+    } catch (error) {
+        console.error('Error al obtener los estados:', error);
+        throw error;
+    }
+};
+
+export const actualizarUsuario = async (idUsuario, usuariosData) => {
+    try {
+        const response = await apiTienda.put(`/usuarios/${idUsuario}`, usuariosData);
+        return response.data;
+    } catch (error) {
+        console.error('Error al actualizar el usuario:', error);
+        throw error;
+    }
+};
+
+export const actualizarCliente = async (idUsuario, usuariosData) => {
+    try {
+        const response = await apiTienda.put(`/editarCliente/${idUsuario}`, usuariosData);
+        return response.data;
+    } catch (error) {
+        console.error('Error al actualizar el usuario:', error);
         throw error;
     }
 };

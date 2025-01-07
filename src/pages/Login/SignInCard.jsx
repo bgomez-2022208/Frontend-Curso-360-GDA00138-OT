@@ -87,18 +87,7 @@ export default function SignInCard({ control, errors, onSubmit }) {
                     />
                 </FormControl>
                 <FormControl>
-                    <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                        <FormLabel htmlFor="password">Password</FormLabel>
-                        <Link
-                            component="button"
-                            type="button"
-                            onClick={handleClickOpen}
-                            variant="body2"
-                            sx={{ alignSelf: 'baseline' }}
-                        >
-                            Forgot your password?
-                        </Link>
-                    </Box>
+
                     <Controller
                         name="password"
                         control={control}

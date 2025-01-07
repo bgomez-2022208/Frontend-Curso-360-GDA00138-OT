@@ -12,12 +12,12 @@ function CartItem({ idProductos, fotoProducto, nombreProducto, precioProducto, q
     return (
         <li className="cart-item">
             <img src={`data:image/jpeg;base64,${fotoProducto}`} alt={nombreProducto} />
-            <div>
+            <div style={{color: 'white'}}>
                 <strong>{nombreProducto}</strong> - ${precio} x {quantity}
             </div>
             <div>
                 <button
-                    onClick={() => incrementQuantity({ idProductos })}
+                    onClick={() => incrementQuantity({idProductos })}
                     disabled={quantity >= stock}
                 >
                     +

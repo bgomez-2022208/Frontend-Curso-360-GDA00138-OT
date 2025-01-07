@@ -1,12 +1,24 @@
 import apiTienda from './ApiTienda.js';
 
-export const getProducts = async () => {
+export const getProducts = async (page, pageSize, minPrice, maxPrice) => {
     try {
-        const response = await apiTienda.get('/productos');
-        return response.data.map(product => ({
+        const response = await apiTienda.get('/productos', {
+            params: {
+                page: page,
+                pageSize: pageSize,
+                minPrice: minPrice,
+                maxPrice: maxPrice
+            }
+        });
+        const products = response.data.listProducts.map(product => ({
             ...product,
-            stock: product.stockProducto || 0
+            stock: product.stockProducto || 0,
         }));
+
+        return {
+            products,
+            totalPages: response.data.pagination?.totalPages || 0
+        };
     } catch (error) {
         console.error('Error al obtener los productos:', error);
         throw error;
@@ -25,7 +37,7 @@ export const getProductById = async (productId) => {
 
 export const obtenerProductos = async (page, pageSize) => {
     try {
-        const response = await apiTienda.get('/Obtenerproductos', { params: { page: page, pageSize: pageSize } });
+        const response = await apiTienda.get('/Obtenerproductos', {params: {page: page, pageSize: pageSize}});
 
         const productos = response.data.data.map(producto => ({
             idProductos: producto.idProductos,
@@ -38,7 +50,7 @@ export const obtenerProductos = async (page, pageSize) => {
             fotoProducto: producto.fotoProducto,
             fechaCreacion: producto.fechaCreacion,
             idCategoriaProductos: producto.idCategoriaProductos,
-            nombreCategoriaProducto: producto.nombreCategoria
+            nombreCategoriaProducto: producto.nombreCategoria,
         }));
 
         const pagination = {
@@ -48,7 +60,7 @@ export const obtenerProductos = async (page, pageSize) => {
             totalPages: response.data.pagination?.totalPages || 0
         };
 
-        return { productos, pagination };
+        return {productos, pagination};
     } catch (error) {
         console.error('Error al obtener los productos:', error);
         throw error;
