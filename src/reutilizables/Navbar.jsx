@@ -63,6 +63,7 @@ export default function ButtonAppBar() {
                                 <MenuItem onClick={handleMenuClose} component={Link} to="/home/cliente">Carrito de compras</MenuItem>
                                 <MenuItem onClick={handleMenuClose} component={Link} to="/home/operador">Historial de ordenes</MenuItem>
                                 <MenuItem onClick={handleMenuClose} component={Link} to="/productos">Productos</MenuItem>
+                                <MenuItem onClick={handleMenuClose} component={Link} to="/categorias">Categorias</MenuItem>
                             </>
                         ) : roleId === 2 ? (
                             <>

@@ -6,6 +6,7 @@ import ClientHome from "./pages/Home/ClientHome.jsx";
 import UsuariosTable from "./pages/UsersCrud.jsx";
 import ProductosTable from "./pages/ProductCrud.jsx";
 import {ProtectedFunctionAdmin, ProtectedRoute} from "./reutilizables/ProtectedRoute.jsx";
+import CategoryCrud from "./pages/CategoryCrud.jsx";
 
 const App = () => {
     return (
@@ -17,6 +18,7 @@ const App = () => {
                 <Route path="/home/operador" element={<ProtectedRoute><OperatorHome /></ProtectedRoute>} />
                 <Route path="/usuarios" element={<ProtectedRoute><ProtectedFunctionAdmin><UsuariosTable /></ProtectedFunctionAdmin></ProtectedRoute>} />
                 <Route path="/productos" element={<ProtectedRoute><ProtectedFunctionAdmin><ProductosTable /></ProtectedFunctionAdmin></ProtectedRoute>} />
+                <Route path="/categorias" element={<CategoryCrud/>} />
             </Routes>
         </Router>
     );

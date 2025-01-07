@@ -335,7 +335,7 @@ export default function ProductosTable() {
                     </TableBody>
                 </Table>
                 <TablePagination
-                    rowsPerPageOptions={[2, 10, 25, 100]}
+                    rowsPerPageOptions={[10, 25, 100]}
                     component="div"
                     labelRowsPerPage="Filas por página:"
                     labelDisplayedRows={({
@@ -503,7 +503,6 @@ export default function ProductosTable() {
                     <Button onClick={handleSubmit(onSubmit)} color="primary">Confirmar</Button>
                 </DialogActions>
             </Dialog>
-
 
             <Dialog open={openCreateDialog} onClose={handleCloseCreateDialog} maxWidth="md" fullWidth>
                 <DialogTitle>Crear Producto</DialogTitle>
