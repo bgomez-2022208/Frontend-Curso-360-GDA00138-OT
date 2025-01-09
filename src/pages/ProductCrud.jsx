@@ -157,7 +157,7 @@ export default function ProductosTable() {
         estados_idestados: Yup.number().required('El estado del producto es obligatorio.'),
     });
 
-    const { control, handleSubmit, setValue, formState: { errors } } = useForm({
+    const { control, handleSubmit, setValue, reset, formState: { errors } } = useForm({
         resolver: yupResolver(schema),
         defaultValues: {
             nombreProducto: '',
@@ -173,17 +173,16 @@ export default function ProductosTable() {
 
     useEffect(() => {
         if (selectedProduct) {
-            setValue('nombreProducto', selectedProduct.nombreProducto);
-            setValue('marcaProducto', selectedProduct.marcaProducto);
-            setValue('precioProducto', selectedProduct.precioProducto);
-            setValue('stockProducto', selectedProduct.stockProducto);
-            setValue('codigoProducto', selectedProduct.codigoProducto);
-            setValue('idCategoriaProductos', selectedProduct.idCategoriaProductos);
-            setValue('estados_idestados', selectedProduct.estados_idestados);
-            setValue('fotoProducto', selectedProduct.fotoProducto);
+            setValue("nombreProducto", selectedProduct.nombreProducto);
+            setValue("marcaProducto", selectedProduct.marcaProducto);
+            setValue("precioProducto", selectedProduct.precioProducto);
+            setValue("stockProducto", selectedProduct.stockProducto);
+            setValue("codigoProducto", selectedProduct.codigoProducto);
+            setValue("idCategoriaProductos", selectedProduct.idCategoriaProductos);
+            setValue("estados_idestados", selectedProduct.estados_idestados);
+            setValue("fotoProducto", selectedProduct.fotoProducto);
         }
     }, [selectedProduct, setValue]);
-    console.log("prueba selected",selectedProduct)
 
     const handleOpenCreateDialog = () => {
         setOpenCreateDialog(true);
@@ -280,17 +279,10 @@ export default function ProductosTable() {
     const handleEdit = (product) => {
         setSelectedProduct(product);
         setOpenEditDialog(true);
-        setValue('nombreProducto', product.nombreProducto);
-        setValue('marcaProducto', product.marcaProducto);
-        setValue('precioProducto', product.precioProducto);
-        setValue('stockProducto', product.stockProducto);
-        setValue('codigoProducto', product.codigoProducto);
-        setValue('idCategoriaProductos', product.idCategoriaProductos);
-        setValue('estados_idestados', product.estados_idestados);
-        setValue('fotoProducto', product.fotoProducto);
     };
 
     const handleCloseEditDialog = () => {
+        reset();
         setOpenEditDialog(false);
         setSelectedProduct(null);
     };

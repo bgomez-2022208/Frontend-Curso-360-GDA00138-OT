@@ -218,6 +218,7 @@ export default function CategoryCrud() {
         } catch (error) {
             console.error('Error al crear la categoría:', error);
         }
+        fetchCategorias(page, rowsPerPage);
         handleCloseCreateCategoryDialog();
     };
 

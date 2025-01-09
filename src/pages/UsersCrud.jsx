@@ -144,12 +144,10 @@ export default function UsuariosTable() {
     const [openEditDialog, setOpenEditDialog] = useState(false);
     const [estados, setEstados] = useState([]);
 
-
     const handleEditUser = (user) => {
-        console.log('Editing user:', user);
         setUserType(user.nombreRol === 'Operador' ? 'operador' : 'cliente');
-        setOpenEditDialog(true);
         reset(user);
+        setOpenEditDialog(true);
     };
 
     const operadorSchema = Yup.object().shape({
@@ -172,11 +170,11 @@ export default function UsuariosTable() {
         telefonoUsuario: Yup.string()
             .required('El teléfono es obligatorio')
             .matches(/^[\d\s+-]+$/, 'El teléfono debe contener solo números, espacios o el símbolo +')
-            .min(7, 'El teléfono debe tener al menos 7 caracteres')
-            .max(45, 'El teléfono no puede tener más de 45 caracteres'),
+            .min(6, 'El teléfono debe tener al menos 6 caracteres')
+            .max(8, 'El teléfono no puede tener más de 8 caracteres'),
         fechaNacimiento: Yup.date()
             .required('La fecha de nacimiento es obligatoria')
-            .max(new Date(), 'La fecha de nacimiento no puede ser en el futuro'),
+            .max(new Date(new Date().setFullYear(new Date().getFullYear() - 18)), 'Debes tener al menos 18 años'),
     });
 
     const clienteSchema = Yup.object().shape({
@@ -204,7 +202,6 @@ export default function UsuariosTable() {
         fechaNacimiento: Yup.date()
             .required('La fecha de nacimiento es obligatoria')
             .max(new Date(), 'La fecha de nacimiento no puede ser en el futuro'),
-        estados_idestados: Yup.number().required('El estado del producto es obligatorio.'),
 
     });
 
@@ -245,7 +242,15 @@ export default function UsuariosTable() {
     };
 
     const handleOpenCreateDialog = () => {
+        reset({
+            estados_idestados: '',
+            correoElectronico: '',
+            passwordUsuario: '',
+            telefonoUsuario: '',
+            fechaNacimiento: '',
+        });
         setOpenCreateDialog(true);
+
     };
 
     const handleCloseCreateDialog = () => {
@@ -254,6 +259,7 @@ export default function UsuariosTable() {
     };
 
     const handleCloseEditDialog = () => {
+        reset();
         setOpenEditDialog(false);
     };
 
@@ -313,7 +319,7 @@ export default function UsuariosTable() {
         }
     };
 
-    const onSubmitOperador =  (data) => {
+    const onSubmitOperador =  async (data) => {
         try {
             const newUser = {
                 correoElectronico: data.correoElectronico,
@@ -324,36 +330,38 @@ export default function UsuariosTable() {
             };
             console.log('Operador data:', newUser);
 
-             crearUsuario(newUser);
+            await  crearUsuario(newUser);
             fetchUsuarios(page, rowsPerPage);
-            handleCloseCreateDialog();
+
         } catch (error) {
             console.error('Error al crear el operador:', error);
         }
+        handleCloseCreateDialog();
     };
 
-    const onSubmitCliente = (data) => {
+    const onSubmitCliente = async (data) => {
         console.log('onSubmitCliente called with data:', data);
 
         try {
             const newUser = {
-                email: data.email,
-                password: data.password,
+                email: data.correoElectronico,
+                password: data.passwordUsuario,
                 razonSocial: data.razonSocial,
                 nombreComercial: data.nombreComercial,
                 direccionEntrega: data.direccionEntrega,
-                telefono: data.telefono,
+                telefono: data.telefonoUsuario,
                 nombreCompleto: data.nombreCompleto,
                 fechaNacimiento: data.fechaNacimiento,
             };
             console.log('Cliente data:', newUser);
 
-            crearCliente(newUser);
+            await crearCliente(newUser);
             fetchUsuarios(page, rowsPerPage);
-            handleCloseCreateDialog();
+
         } catch (error) {
             console.error('Error al crear el cliente:', error);
         }
+        handleCloseCreateDialog();
     };
 
     const fetchUsuarios = async (page, rowsPerPage) => {
@@ -534,14 +542,14 @@ export default function UsuariosTable() {
                             <>
                                 <FormControl sx={{ width: '100%' }}>
                                     <Controller
-                                        name="email"
+                                        name="correoElectronico"
                                         control={control}
                                         render={({ field }) => (
                                             <TextField
                                                 {...field}
-                                                label="Email"
-                                                error={!!errors.email}
-                                                helperText={errors.email ? errors.email.message : ''}
+                                                label="correoElectronico"
+                                                error={!!errors.correoElectronico}
+                                                helperText={errors.correoElectronico ? errors.correoElectronico.message : ''}
                                                 sx={{ width: '100%' }}
                                             />
                                         )}
@@ -549,15 +557,15 @@ export default function UsuariosTable() {
                                 </FormControl>
                                 <FormControl sx={{ width: '100%' }}>
                                     <Controller
-                                        name="password"
+                                        name="passwordUsuario"
                                         control={control}
                                         render={({ field }) => (
                                             <TextField
                                                 {...field}
                                                 label="Password"
                                                 type="password"
-                                                error={!!errors.password}
-                                                helperText={errors.password ? errors.password.message : ''}
+                                                error={!!errors.passwordUsuario}
+                                                helperText={errors.passwordUsuario ? errors.passwordUsuario.message : ''}
                                                 sx={{ width: '100%' }}
                                             />
                                         )}
@@ -610,14 +618,14 @@ export default function UsuariosTable() {
                                 </FormControl>
                                 <FormControl sx={{ width: '100%' }}>
                                     <Controller
-                                        name="telefono"
+                                        name="telefonoUsuario"
                                         control={control}
                                         render={({ field }) => (
                                             <TextField
                                                 {...field}
                                                 label="Telefono"
-                                                error={!!errors.telefono}
-                                                helperText={errors.telefono ? errors.telefono.message : ''}
+                                                error={!!errors.telefonoUsuario}
+                                                helperText={errors.telefonoUsuario ? errors.telefonoUsuario.message : ''}
                                                 sx={{ width: '100%' }}
                                             />
                                         )}
@@ -785,7 +793,7 @@ export default function UsuariosTable() {
                                                 <TextField
                                                     disabled
                                                     {...field}
-                                                    label="Email"
+                                                    label="correoElectronico"
                                                     error={!!errors.correoElectronico}
                                                     helperText={errors.correoElectronico ? errors.correoElectronico.message : ''}
                                                     sx={{ width: '100%' }}

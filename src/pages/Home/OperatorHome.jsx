@@ -82,6 +82,7 @@ export default function OperatorHome() {
             try {
                 const response = await OrdenEstadoAceptado(idOrden);
                 console.log('Estado de la orden actualizado:', response);
+                fetchOrders(page, rowsPerPage)
                 handleCloseDialog();
             } catch (error) {
                 console.error('Error al actualizar el estado de la orden:', error);
@@ -91,6 +92,7 @@ export default function OperatorHome() {
         try {
             const response = await OrdenEstadoRechazado(idOrden, { idEstados: 11 });
             console.log('Estado de la orden actualizado:', response);
+            fetchOrders(page, rowsPerPage)
             handleCloseDialog();
         } catch (error) {
             console.error('Error al actualizar el estado de la orden:', error);
